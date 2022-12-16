@@ -61,8 +61,23 @@ export const IntroContainer = styled.div`
       flex-direction: column-reverse;
       padding: 1rem;
       max-width: 100%;
-      margin-top: 100px;
+
+      .box-content {
+        h2 {
+          font-size: 2rem;
+          line-height: 100%;
+          margin-top: 1rem;
+        }
+        ul {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+      }
     }
+  }
+
+  @media (max-width: 1024px) {
+    height: auto;
   }
 `
 

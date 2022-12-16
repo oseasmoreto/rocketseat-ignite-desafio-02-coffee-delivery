@@ -4,6 +4,8 @@ export const HeaderContainer = styled.nav`
   display: flex;
   justify-content: center;
   background: ${(props) => props.theme.background};
+  max-width: 100%;
+  padding: 0 1rem;
 
   .content {
     width: 74rem;

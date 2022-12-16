@@ -1,6 +1,26 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: Baloo2-Bold;
+    src: url('/assets/fonts/Baloo2-Bold.ttf');
+  }
+  @font-face {
+    font-family: Baloo2-ExtraBold;
+    src: url('/assets/fonts/baloo-2/Baloo2-ExtraBold.ttf');
+  }
+  @font-face {
+    font-family: Baloo2-Medium;
+    src: url('/assets/fonts/baloo-2/Baloo2-Medium.ttf');
+  }
+  @font-face {
+    font-family: Baloo2-Regular;
+    src: url('/assets/fonts/baloo-2/Baloo2-Regular.ttf');
+  }
+  @font-face {
+    font-family: Baloo2-SemiBold;
+    src: url('/assets/fonts/baloo-2/Baloo2-SemiBold.ttf');
+  }
   * {
     margin: 0;
     padding: 0;

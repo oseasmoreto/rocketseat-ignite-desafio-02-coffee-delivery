@@ -26,7 +26,7 @@ export const IntroContainer = styled.div`
       gap: 1rem;
 
       h2 {
-        font-family: 'Roboto';
+        font-family: Baloo2-ExtraBold;
         font-weight: 900;
         font-size: 48px;
         line-height: 130%;

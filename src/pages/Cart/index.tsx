@@ -5,7 +5,8 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { Block, ButtonPayment, CartContainer } from './styles'
+import { Item } from '../../components/Cart/Item'
+import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
 
 export function Cart() {
   return (
@@ -66,6 +67,23 @@ export function Cart() {
       </div>
       <aside className="box-info-order">
         <h4>Cafés selecionados</h4>
+        <Block className="cart-itens">
+          <Item />
+          <Item />
+          <div className="box-price">
+            <p>
+              Total de itens <span>R$29,70</span>
+            </p>
+            <p>
+              Entrega <span>R$3,50</span>
+            </p>
+            <p>
+              Total
+              <span>R$33,20</span>
+            </p>
+          </div>
+          <ButtonConfirm>Confirmar pedido</ButtonConfirm>
+        </Block>
       </aside>
     </CartContainer>
   )

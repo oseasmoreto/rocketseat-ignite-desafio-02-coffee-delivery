@@ -8,7 +8,7 @@ export function InputQuantify() {
       <button>
         <FontAwesomeIcon icon={faMinus} />
       </button>
-      <input type="text" min="1" value="1" />
+      <input type="text" min="1" defaultValue={1} />
       <button>
         <FontAwesomeIcon icon={faPlus} />
       </button>

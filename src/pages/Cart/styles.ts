@@ -97,6 +97,37 @@ export const CartContainer = styled.main`
     }
   }
 
+  .cart-itens {
+    border-top-right-radius: 44px;
+    border-bottom-left-radius: 44px;
+
+    .box-price {
+      p {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+
+        font-size: 14px;
+        line-height: 1.3;
+        color: ${(props) => props.theme.text};
+
+        span {
+          font-size: 1rem;
+        }
+
+        &:nth-child(3) {
+          font-weight: bold;
+          color: ${(props) => props.theme.subtitle};
+          font-size: 20px;
+
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: 1024px) {
     width: 100%;
     grid-template-columns: 1fr;
@@ -180,5 +211,26 @@ export const ButtonPayment = styled.button`
 
   @media (max-width: 1024px) {
     width: 100%;
+  }
+`
+export const ButtonConfirm = styled.button`
+  width: 100%;
+  height: 46px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background-color: ${(props) => props.theme.secondary.normal};
+
+  font-size: 14px;
+  line-height: 1.3;
+  color: ${(props) => props.theme.white};
+  text-transform: uppercase;
+
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.secondary.dark};
   }
 `

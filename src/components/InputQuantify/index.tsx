@@ -29,7 +29,7 @@ export function InputQuantify() {
       <input
         type="text"
         min="1"
-        defaultValue={1}
+        defaultValue={quantify}
         value={quantify}
         onBlur={(e) => setQuantity(parseInt(e.target.value))}
       />

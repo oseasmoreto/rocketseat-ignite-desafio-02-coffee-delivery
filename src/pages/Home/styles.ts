@@ -23,6 +23,11 @@ export const HomeContainer = styled.main`
         justify-content: space-between;
         align-items: center;
         margin-top: 3rem;
+
+        @media (max-width: 1024px) {
+          justify-content: center;
+          gap: 2rem;
+        }
       }
     }
   }

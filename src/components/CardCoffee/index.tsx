@@ -2,21 +2,30 @@ import { ButtonCart } from '../Common/ButtonCart'
 import { InputQuantify } from '../InputQuantify'
 import { CardCoffeeContainer } from './styles'
 
-export function CardCoffee() {
+import { Coffee } from '../../types/coffee'
+
+interface CardCoffeeProps {
+  item: Coffee
+}
+
+export function CardCoffee({ item }: CardCoffeeProps) {
   return (
     <CardCoffeeContainer>
-      <img
-        src="/assets/images/coffees/expresso-tradicional.png"
-        alt="Expresso Tradicional"
-      />
+      <img src={item.image} alt={item.name} />
       <div className="tags-box">
-        <label htmlFor="">Tradicional</label>
+        {item.label.map((item) => {
+          return (
+            <label key={item} htmlFor="">
+              {item}
+            </label>
+          )
+        })}
       </div>
-      <h5>Expresso Tradicional</h5>
-      <p>O tradional café feito com água quente e grãos moídos</p>
+      <h5>{item.name}</h5>
+      <p>{item.description}</p>
       <div className="card-bottom">
         <span>
-          <span className="sufix">R$</span> 9,00
+          <span className="sufix">R$</span> {item.price.toFixed(2)}
         </span>
         <InputQuantify />
         <ButtonCart variant="primary-dark" />

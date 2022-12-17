@@ -18,6 +18,10 @@ export const HomeContainer = styled.main`
       }
 
       .box-coffees {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         margin-top: 3rem;
       }
     }

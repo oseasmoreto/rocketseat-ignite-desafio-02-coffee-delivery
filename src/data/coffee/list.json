@@ -1,0 +1,54 @@
+[
+  {
+    "id": "expresso-tradicional",
+    "image": "/assets/images/coffees/expresso-tradicional.png",
+    "name": "Expresso Tradicional",
+    "label": [
+      "tradicional"
+    ],
+    "description": "O tradional café feito com água quente e grãos moídos",
+    "price": 9.90
+  },
+  {
+    "id": "expresso-americano",
+    "image": "/assets/images/coffees/expresso-tradicional.png",
+    "name": "Expresso Americano",
+    "label": [
+      "tradicional"
+    ],
+    "description": "O tradional café feito com água quente e grãos moídos",
+    "price": 9.90
+  },
+  {
+    "id": "expresso-cremoso",
+    "image": "/assets/images/coffees/expresso-tradicional.png",
+    "name": "Expresso Cremoso",
+    "label": [
+      "tradicional"
+    ],
+    "description": "O tradional café feito com água quente e grãos moídos",
+    "price": 9.90
+  },
+  {
+    "id": "expresso-gelado",
+    "image": "/assets/images/coffees/expresso-tradicional.png",
+    "name": "Expresso Gelado",
+    "label": [
+      "Tradicional",
+      "Gelado"
+    ],
+    "description": "O tradional café feito com água quente e grãos moídos",
+    "price": 9.90
+  },
+  {
+    "id": "cafe-com-leite",
+    "image": "/assets/images/coffees/expresso-tradicional.png",
+    "name": "Café com Leite",
+    "label": [
+      "Tradicional",
+      "Com Leite"
+    ],
+    "description": "O tradional café feito com água quente e grãos moídos",
+    "price": 9.90
+  }
+]

@@ -18,7 +18,7 @@ export const CardCoffeeContainer = styled.div`
   padding: 1rem;
   padding-top: 0;
 
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 
   img {
     max-width: 120px;

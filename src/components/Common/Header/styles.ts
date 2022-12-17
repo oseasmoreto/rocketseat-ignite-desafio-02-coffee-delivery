@@ -40,6 +40,31 @@ export const HeaderContainer = styled.nav`
         color: ${(props) => props.theme.primary.dark};
         font-size: 14px;
       }
+
+      .box-button {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        text-decoration: none;
+      }
     }
   }
+`
+export const Notification = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: -0.5rem;
+  margin-left: -0.8rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  background-color: ${(props) => props.theme.secondary.dark};
+
+  color: ${(props) => props.theme.white};
+  font-weight: bold;
+  font-size: 12px;
+  text-decoration: none;
 `

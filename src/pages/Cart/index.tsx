@@ -5,6 +5,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { NavLink } from 'react-router-dom'
 import { Item } from '../../components/Cart/Item'
 import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
 
@@ -82,7 +83,9 @@ export function Cart() {
               <span>R$33,20</span>
             </p>
           </div>
-          <ButtonConfirm>Confirmar pedido</ButtonConfirm>
+          <NavLink to="/cart/confirm">
+            <ButtonConfirm>Confirmar pedido</ButtonConfirm>
+          </NavLink>
         </Block>
       </aside>
     </CartContainer>

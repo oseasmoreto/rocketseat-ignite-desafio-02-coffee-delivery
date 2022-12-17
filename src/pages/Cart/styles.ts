@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const CartContainer = styled.main`
   width: 74rem;
-  height: 100vh;
   display: grid;
   grid-template-columns: 640px 448px;
   gap: 2rem;
@@ -226,6 +225,7 @@ export const ButtonConfirm = styled.button`
   line-height: 1.3;
   color: ${(props) => props.theme.white};
   text-transform: uppercase;
+  font-weight: bold;
 
   transition: all 0.2s;
   cursor: pointer;

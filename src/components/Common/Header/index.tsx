@@ -3,6 +3,7 @@ import LogoDeliveryCoffee from '../../../assets/images/logo.png'
 import { ButtonCart } from '../ButtonCart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom'
 
 export function Header() {
   return (
@@ -14,7 +15,9 @@ export function Header() {
             <FontAwesomeIcon fontSize={18} icon={faLocationDot} /> Porto Alegre,
             RG
           </div>
-          <ButtonCart variant="default" />
+          <NavLink to="/cart">
+            <ButtonCart variant="default" />
+          </NavLink>
         </div>
       </div>
     </HeaderContainer>

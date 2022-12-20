@@ -19,6 +19,16 @@ export const CartContainer = styled.main`
     margin-bottom: 1rem;
   }
 
+  .link {
+    text-decoration: none;
+    color: ${(props) => props.theme.secondary.normal};
+
+    &:hover {
+      text-decoration: underline;
+      color: ${(props) => props.theme.secondary.dark};
+    }
+  }
+
   .address {
     p {
       color: ${(props) => props.theme.subtitle};

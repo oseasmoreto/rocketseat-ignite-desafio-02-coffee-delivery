@@ -5,10 +5,11 @@ import { InputQuantityContainer } from './styles'
 
 interface InputQuantityProps {
   addQuantity: (quantity: number) => void
+  qtd?: number
 }
 
-export function InputQuantity({ addQuantity }: InputQuantityProps) {
-  const [quantity, setQuantity] = useState<number>(1)
+export function InputQuantity({ addQuantity, qtd = 1 }: InputQuantityProps) {
+  const [quantity, setQuantity] = useState<number>(qtd)
 
   function handleQuantity(type: 'sub' | 'add'): void {
     let qtd = quantity

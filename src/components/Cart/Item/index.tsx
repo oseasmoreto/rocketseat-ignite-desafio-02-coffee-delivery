@@ -1,22 +1,25 @@
 import { Trash } from 'phosphor-react'
 import { InputQuantity } from '../../InputQuantity'
 import { ButtonRemove, ItemContainer } from './styles'
+import { Item as ItemType } from '../../../types/cart'
 
-export function Item() {
+interface ItemProps {
+  item: ItemType
+}
+
+export function Item({ item }: ItemProps) {
+  function handleQuantityItem(quantity: number) {}
   return (
     <ItemContainer>
       <div className="box-img">
-        <img
-          src="/assets/images/coffees/expresso-tradicional.png"
-          alt="Expresso Tradicional"
-        />
+        <img src={item.image} alt={item.name} />
       </div>
       <div className="box-info">
         <p>
-          Expresso Tradicional <span>R$ 9,90</span>
+          {item.name} <span>R$ {item.price.toFixed(2)}</span>
         </p>
         <div className="actions">
-          <InputQuantity />
+          <InputQuantity qtd={item.quantity} addQuantity={handleQuantityItem} />
           <ButtonRemove>
             <Trash size={16} className="icon" /> Remover
           </ButtonRemove>

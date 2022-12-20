@@ -5,11 +5,28 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Item } from '../../components/Cart/Item'
+import { CartContext } from '../../contexts/CartContext'
 import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
 
 export function Cart() {
+  const { items } = useContext(CartContext)
+
+  if (items.length === 0)
+    return (
+      <CartContainer>
+        <div className="box-info-client">
+          <Block>
+            <h4>Nenhum item em seu carrinho</h4>
+            <NavLink className="link" to="/">
+              Voltar para a listagem
+            </NavLink>
+          </Block>
+        </div>
+      </CartContainer>
+    )
   return (
     <CartContainer>
       <div className="box-info-client">
@@ -69,8 +86,10 @@ export function Cart() {
       <aside className="box-info-order">
         <h4>Cafés selecionados</h4>
         <Block className="cart-itens">
-          <Item />
-          <Item />
+          {items.map((item) => {
+            return <Item key={item.id} item={item} />
+          })}
+
           <div className="box-price">
             <p>
               Total de itens <span>R$29,70</span>

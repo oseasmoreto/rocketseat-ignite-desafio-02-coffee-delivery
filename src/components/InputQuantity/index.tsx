@@ -1,13 +1,17 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import { InputQuantifyContainer } from './styles'
+import { InputQuantityContainer } from './styles'
 
-export function InputQuantify() {
-  const [quantify, setQuantity] = useState<number>(1)
+interface InputQuantityProps {
+  addQuantity: (quantity: number) => void
+}
 
-  function handleQuantify(type: 'sub' | 'add'): void {
-    let qtd = quantify
+export function InputQuantity({ addQuantity }: InputQuantityProps) {
+  const [quantity, setQuantity] = useState<number>(1)
+
+  function handleQuantity(type: 'sub' | 'add'): void {
+    let qtd = quantity
 
     switch (type) {
       case 'sub':
@@ -18,24 +22,25 @@ export function InputQuantify() {
         break
     }
 
+    addQuantity(qtd)
     setQuantity(qtd)
   }
 
   return (
-    <InputQuantifyContainer>
-      <button onClick={() => handleQuantify('sub')}>
+    <InputQuantityContainer>
+      <button onClick={() => handleQuantity('sub')}>
         <FontAwesomeIcon icon={faMinus} />
       </button>
       <input
         type="text"
         min="1"
-        defaultValue={quantify}
-        value={quantify}
+        defaultValue={quantity}
+        value={quantity}
         onBlur={(e) => setQuantity(parseInt(e.target.value))}
       />
-      <button onClick={() => handleQuantify('add')}>
+      <button onClick={() => handleQuantity('add')}>
         <FontAwesomeIcon icon={faPlus} />
       </button>
-    </InputQuantifyContainer>
+    </InputQuantityContainer>
   )
 }

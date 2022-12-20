@@ -1,14 +1,28 @@
 import { ButtonCart } from '../Common/ButtonCart'
-import { InputQuantify } from '../InputQuantify'
 import { CardCoffeeContainer } from './styles'
 
 import { Coffee } from '../../types/coffee'
+import { useContext, useState } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+import { InputQuantity } from '../InputQuantity'
 
 interface CardCoffeeProps {
   item: Coffee
 }
 
 export function CardCoffee({ item }: CardCoffeeProps) {
+  const { addProductCart } = useContext(CartContext)
+  const [quantity, setQuantity] = useState<number>(1)
+
+  function handdleSetQuantity(quantity: number) {
+    setQuantity(quantity)
+  }
+
+  function sendProductToCart(coffee: Coffee) {
+    const item = { ...coffee, quantity }
+    addProductCart(item)
+  }
+
   return (
     <CardCoffeeContainer>
       <img src={item.image} alt={item.name} />
@@ -27,8 +41,11 @@ export function CardCoffee({ item }: CardCoffeeProps) {
         <span>
           <span className="sufix">R$</span> {item.price.toFixed(2)}
         </span>
-        <InputQuantify />
-        <ButtonCart variant="primary-dark" />
+        <InputQuantity addQuantity={handdleSetQuantity} />
+        <ButtonCart
+          onClick={() => sendProductToCart(item)}
+          variant="primary-dark"
+        />
       </div>
     </CardCoffeeContainer>
   )

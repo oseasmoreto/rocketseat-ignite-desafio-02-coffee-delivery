@@ -1,5 +1,5 @@
 import { Trash } from 'phosphor-react'
-import { InputQuantify } from '../../InputQuantify'
+import { InputQuantity } from '../../InputQuantity'
 import { ButtonRemove, ItemContainer } from './styles'
 
 export function Item() {
@@ -16,7 +16,7 @@ export function Item() {
           Expresso Tradicional <span>R$ 9,90</span>
         </p>
         <div className="actions">
-          <InputQuantify />
+          <InputQuantity />
           <ButtonRemove>
             <Trash size={16} className="icon" /> Remover
           </ButtonRemove>

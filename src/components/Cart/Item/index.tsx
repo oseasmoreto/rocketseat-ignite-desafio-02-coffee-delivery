@@ -5,6 +5,9 @@ import { Item as ItemType } from '../../../types/cart'
 import { useContext } from 'react'
 import { CartContext } from '../../../contexts/CartContext'
 
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 interface ItemProps {
   item: ItemType
 }
@@ -16,7 +19,9 @@ export function Item({ item }: ItemProps) {
 
   function handleDeleteProduct(item: ItemType) {
     removeProductCart(item)
+    toast.success('Produto removido com sucesso')
   }
+
   return (
     <ItemContainer>
       <div className="box-img">

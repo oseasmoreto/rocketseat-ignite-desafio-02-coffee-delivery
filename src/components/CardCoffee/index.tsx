@@ -6,6 +6,9 @@ import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 import { InputQuantity } from '../InputQuantity'
 
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 interface CardCoffeeProps {
   item: Coffee
 }
@@ -21,6 +24,7 @@ export function CardCoffee({ item }: CardCoffeeProps) {
   function sendProductToCart(coffee: Coffee) {
     const item = { ...coffee, quantity }
     addProductCart(item)
+    toast.success('Produto adicionado com sucesso')
   }
 
   return (

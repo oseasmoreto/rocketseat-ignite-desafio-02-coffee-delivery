@@ -13,9 +13,11 @@ interface ItemProps {
 }
 
 export function Item({ item }: ItemProps) {
-  const { removeProductCart } = useContext(CartContext)
+  const { removeProductCart, updateProductCart } = useContext(CartContext)
 
-  function handleQuantityItem(quantity: number) {}
+  function handleQuantityItem(quantity: number) {
+    updateProductCart(item, quantity)
+  }
 
   function handleDeleteProduct(item: ItemType) {
     removeProductCart(item)

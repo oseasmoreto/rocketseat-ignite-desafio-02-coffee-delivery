@@ -3,11 +3,14 @@ import LogoDeliveryCoffee from '../../../assets/images/logo.png'
 import { ButtonCart } from '../ButtonCart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { CartContext } from '../../../contexts/CartContext'
+import { useContext } from 'react'
 
 export function Header() {
-  const location = useLocation()
-  const activeCart = location.pathname === '/cart'
+  const { items } = useContext(CartContext)
+  const totalCart = items.length
+  const activeCart = totalCart > 0
 
   return (
     <HeaderContainer>
@@ -22,7 +25,7 @@ export function Header() {
           </div>
           <NavLink to="/cart" className="box-button">
             <ButtonCart variant="default" />
-            {activeCart && <Notification>1</Notification>}
+            {activeCart && <Notification>{totalCart}</Notification>}
           </NavLink>
         </div>
       </div>

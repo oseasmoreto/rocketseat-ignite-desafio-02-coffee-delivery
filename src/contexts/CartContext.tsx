@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import { addProductToCartAction } from '../reducers/cart/actions'
+import { cartReducer } from '../reducers/cart/reducer'
 import { Cart, Item } from '../types/cart'
 
 interface CartContextType extends Cart {
@@ -13,9 +15,7 @@ export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProps) {
   const [cartState, dispatch] = useReducer(
-    (state: any, action: any) => {
-      return state
-    },
+    cartReducer,
     {
       items: [],
       client: {},
@@ -38,12 +38,18 @@ export function CartContextProvider({ children }: CartContextProps) {
       }
     },
   )
+  const { items, client, payment, price } = cartState
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cartState)
+
+    localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateJSON)
+  }, [cartState])
 
   function addProductCart(item: Item) {
-    console.log(item)
+    dispatch(addProductToCartAction(item))
   }
 
-  const { items, client, payment, price } = cartState
   return (
     <CartContext.Provider
       value={{ items, client, payment, price, addProductCart }}

@@ -10,6 +10,15 @@ export function cartReducer(state: CartState, action: any) {
       return produce(state, (draft) => {
         draft.items.push(action.payload.item)
       })
+    case ActionTypes.REMOVE_PRODUCT: {
+      const products = state.items.filter((item) => {
+        return item.id !== action.payload.item.id
+      })
+
+      return produce(state, (draft) => {
+        draft.items = products
+      })
+    }
     default:
       return state
   }

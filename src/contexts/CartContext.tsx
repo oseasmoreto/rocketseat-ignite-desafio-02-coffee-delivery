@@ -1,11 +1,15 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
-import { addProductToCartAction } from '../reducers/cart/actions'
+import {
+  addProductToCartAction,
+  removeProductToCartAction,
+} from '../reducers/cart/actions'
 import { cartReducer } from '../reducers/cart/reducer'
 import { Cart, Item } from '../types/cart'
 import 'react-toastify/dist/ReactToastify.css'
 interface CartContextType extends Cart {
   addProductCart: (item: Item) => void
+  removeProductCart: (item: Item) => void
 }
 
 interface CartContextProps {
@@ -52,9 +56,21 @@ export function CartContextProvider({ children }: CartContextProps) {
     toast.success('Produto adicionado com sucesso')
   }
 
+  function removeProductCart(item: Item) {
+    dispatch(removeProductToCartAction(item))
+    toast.success('Produto removido com sucesso')
+  }
+
   return (
     <CartContext.Provider
-      value={{ items, client, payment, price, addProductCart }}
+      value={{
+        items,
+        client,
+        payment,
+        price,
+        addProductCart,
+        removeProductCart,
+      }}
     >
       {children}
     </CartContext.Provider>

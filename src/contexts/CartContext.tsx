@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   addProductToCartAction,
   removeProductToCartAction,
+  updateAmountCartAction,
   updateProductToCartAction,
 } from '../reducers/cart/actions'
 import { cartReducer } from '../reducers/cart/reducer'
@@ -10,6 +11,7 @@ interface CartContextType extends Cart {
   addProductCart: (item: Item) => void
   removeProductCart: (item: Item) => void
   updateProductCart: (item: Item, quantity: number) => void
+  updateAmountCart: () => void
 }
 
 interface CartContextProps {
@@ -25,7 +27,11 @@ export function CartContextProvider({ children }: CartContextProps) {
       items: [],
       client: {},
       payment: null,
-      price: {},
+      price: {
+        delivery: 0,
+        items: 0,
+        amount: 0,
+      },
     },
     () => {
       const storedStateAsJSON = localStorage.getItem(
@@ -40,6 +46,11 @@ export function CartContextProvider({ children }: CartContextProps) {
         items: [],
         client: null,
         payment: null,
+        price: {
+          delivery: 0,
+          items: 0,
+          amount: 0,
+        },
       }
     },
   )
@@ -53,14 +64,21 @@ export function CartContextProvider({ children }: CartContextProps) {
 
   function addProductCart(item: Item) {
     dispatch(addProductToCartAction(item))
+    dispatch(updateAmountCart())
   }
 
   function removeProductCart(item: Item) {
     dispatch(removeProductToCartAction(item))
+    dispatch(updateAmountCart())
   }
 
   function updateProductCart(item: Item, quantity: number) {
     dispatch(updateProductToCartAction(item, quantity))
+    dispatch(updateAmountCart())
+  }
+
+  function updateAmountCart() {
+    dispatch(updateAmountCartAction())
   }
 
   return (
@@ -73,6 +91,7 @@ export function CartContextProvider({ children }: CartContextProps) {
         addProductCart,
         removeProductCart,
         updateProductCart,
+        updateAmountCart,
       }}
     >
       {children}

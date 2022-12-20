@@ -4,6 +4,7 @@ export enum ActionTypes {
   ADD_NEW_PRODUCT = 'ADD_NEW_PRODUCT',
   REMOVE_PRODUCT = 'REMOVE_PRODUCT',
   UPDATE_PRODUCT = 'UPDATE_PRODUCT',
+  UPDATE_AMOUNT_CART = 'UPDATE_AMOUNT_CART',
 }
 
 export function addProductToCartAction(item: Item) {
@@ -31,5 +32,11 @@ export function updateProductToCartAction(item: Item, quantity: number) {
       item,
       quantity,
     },
+  }
+}
+
+export function updateAmountCartAction() {
+  return {
+    type: ActionTypes.UPDATE_AMOUNT_CART,
   }
 }

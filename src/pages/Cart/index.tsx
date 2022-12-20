@@ -12,7 +12,7 @@ import { CartContext } from '../../contexts/CartContext'
 import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
 
 export function Cart() {
-  const { items } = useContext(CartContext)
+  const { items, price } = useContext(CartContext)
 
   if (items.length === 0)
     return (
@@ -92,14 +92,14 @@ export function Cart() {
 
           <div className="box-price">
             <p>
-              Total de itens <span>R$29,70</span>
+              Total de itens <span>R${price.items.toFixed(2)}</span>
             </p>
             <p>
-              Entrega <span>R$3,50</span>
+              Entrega <span>R${price.delivery.toFixed(2)}</span>
             </p>
             <p>
               Total
-              <span>R$33,20</span>
+              <span>R${price.amount.toFixed(2)}</span>
             </p>
           </div>
           <NavLink to="/cart/confirm">

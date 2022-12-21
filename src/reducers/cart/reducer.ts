@@ -49,6 +49,11 @@ export function cartReducer(state: CartState, action: any) {
       )
 
       return produce(state, (draft) => {
+        if (draft.client.zipcode.length > 0 && draft.price.delivery === 0) {
+          const priceDelivery = generateRandomNumber()
+          draft.price.delivery = priceDelivery
+        }
+
         draft.price.items = sumAllItens
         draft.price.amount = draft.price.items + draft.price.delivery
       })

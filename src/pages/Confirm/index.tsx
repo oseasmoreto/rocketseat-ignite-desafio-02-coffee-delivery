@@ -3,8 +3,26 @@ import ImgMotoca from '../../assets/images/motoca.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { CurrencyDollar } from 'phosphor-react'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+import { PaymentType } from '../../types/cart'
 
 export function Confirm() {
+  const { client, payment } = useContext(CartContext)
+
+  function getLabelPayment(payment: PaymentType): string {
+    switch (payment) {
+      case 'credit':
+        return 'Cartão de Crédito'
+      case 'debit':
+        return 'Cartão de Débito'
+      case 'money':
+        return 'Dinheiro'
+
+      default:
+        return 'Não Encontrado'
+    }
+  }
   return (
     <ConfirmContainer>
       <div className="box-confirm">
@@ -19,8 +37,11 @@ export function Confirm() {
                 <FontAwesomeIcon fontSize={16} icon={faLocationDot} />
               </ConfirmDot>
               <p>
-                Entrega em <span>Rua João Daniel Martinelli, 102</span> Farrapos
-                - Porto Alegre, RS
+                Entrega em{' '}
+                <span>
+                  Rua {client.address}, {client.number}
+                </span>{' '}
+                {client.neighbourhood}- {client.city}, {client.state}
               </p>
             </li>
             <li>
@@ -40,7 +61,7 @@ export function Confirm() {
               <p>
                 Pagamento na entrega
                 <br />
-                <span>Cartão de Crédito</span>
+                <span>{getLabelPayment(payment)}</span>
               </p>
             </li>
           </ul>

@@ -213,7 +213,8 @@ export const ButtonPayment = styled.button`
 
   &:hover,
   &:focus,
-  &:active {
+  &:active,
+  &.active {
     background-color: ${(props) => props.theme.primary.light};
     border: 1px solid ${(props) => props.theme.primary.normal};
   }

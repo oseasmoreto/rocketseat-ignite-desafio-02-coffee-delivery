@@ -58,6 +58,11 @@ export function cartReducer(state: CartState, action: any) {
         draft.client = action.payload.client
       })
     }
+    case ActionTypes.ADD_PAYMENT_CART: {
+      return produce(state, (draft) => {
+        draft.payment = action.payload.payment
+      })
+    }
     default:
       return state
   }

@@ -1,19 +1,21 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   addClientToCartAction,
+  addPaymentToCartAction,
   addProductToCartAction,
   removeProductToCartAction,
   updateAmountCartAction,
   updateProductToCartAction,
 } from '../reducers/cart/actions'
 import { cartReducer } from '../reducers/cart/reducer'
-import { Cart, Client, Item } from '../types/cart'
+import { Cart, Client, Item, PaymentType } from '../types/cart'
 interface CartContextType extends Cart {
   addProductCart: (item: Item) => void
   removeProductCart: (item: Item) => void
   updateProductCart: (item: Item, quantity: number) => void
   updateAmountCart: () => void
   addClientCart: (client: Client) => void
+  addPaymentToCart: (payment: PaymentType) => void
 }
 
 interface CartContextProps {
@@ -103,6 +105,10 @@ export function CartContextProvider({ children }: CartContextProps) {
     dispatch(addClientToCartAction(client))
   }
 
+  function addPaymentToCart(payment: PaymentType) {
+    dispatch(addPaymentToCartAction(payment))
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -115,6 +121,7 @@ export function CartContextProvider({ children }: CartContextProps) {
         updateProductCart,
         updateAmountCart,
         addClientCart,
+        addPaymentToCart,
       }}
     >
       {children}

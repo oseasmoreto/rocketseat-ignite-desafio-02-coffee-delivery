@@ -16,6 +16,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { PaymentType } from '../../types/cart'
+import { addPaymentToCartAction } from '../../reducers/cart/actions'
 
 const newClientFormValidationSchema = zod.object({
   zipcode: zod.string().min(8, 'Informe o CEP.').max(8, 'Informe o CEP.'),
@@ -30,7 +32,8 @@ const newClientFormValidationSchema = zod.object({
 type NewClientFormData = zod.infer<typeof newClientFormValidationSchema>
 
 export function Cart() {
-  const { items, price, client, addClientCart } = useContext(CartContext)
+  const { items, price, client, payment, addClientCart, addPaymentToCart } =
+    useContext(CartContext)
 
   const newClientForm = useForm<NewClientFormData>({
     resolver: zodResolver(newClientFormValidationSchema),
@@ -54,6 +57,10 @@ export function Cart() {
   function handleAddAddressClient(data: NewClientFormData) {
     addClientCart(data)
     toast.success('Endereço salvo com sucesso!')
+  }
+
+  function handleAddPayment(payment: PaymentType) {
+    addPaymentToCart(payment)
   }
 
   useEffect(() => {
@@ -132,13 +139,22 @@ export function Cart() {
             </p>
           </div>
           <div className="box-button">
-            <ButtonPayment>
+            <ButtonPayment
+              className={payment === 'credit' ? 'active' : ''}
+              onClick={() => handleAddPayment('credit')}
+            >
               <CreditCard size={16} className="icon" /> Cartão de crédito
             </ButtonPayment>
-            <ButtonPayment>
+            <ButtonPayment
+              className={payment === 'debit' ? 'active' : ''}
+              onClick={() => handleAddPayment('debit')}
+            >
               <Bank size={16} className="icon" /> Cartão de débito
             </ButtonPayment>
-            <ButtonPayment>
+            <ButtonPayment
+              className={payment === 'money' ? 'active' : ''}
+              onClick={() => handleAddPayment('money')}
+            >
               <Money size={16} className="icon" /> Dinheiro
             </ButtonPayment>
           </div>

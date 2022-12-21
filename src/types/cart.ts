@@ -15,14 +15,16 @@ export type Client = {
   complement: string | null
 }
 
+export type PaymentType = 'credit' | 'debit' | 'money' | null
+
 export type Payment = {
-  method: 'credit' | 'debit' | 'money' | null
+  method: PaymentType
 }
 
 export type Cart = {
   items: Items
   client: Client
-  payment: Payment
+  payment: PaymentType
   price: {
     delivery: number
     items: number

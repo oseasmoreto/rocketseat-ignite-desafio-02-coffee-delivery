@@ -3,6 +3,7 @@ import {
   addClientToCartAction,
   addPaymentToCartAction,
   addProductToCartAction,
+  clearCartAction,
   removeProductToCartAction,
   updateAmountCartAction,
   updateProductToCartAction,
@@ -16,6 +17,7 @@ interface CartContextType extends Cart {
   updateAmountCart: () => void
   addClientCart: (client: Client) => void
   addPaymentToCart: (payment: PaymentType) => void
+  clearCart: () => void
 }
 
 interface CartContextProps {
@@ -109,6 +111,10 @@ export function CartContextProvider({ children }: CartContextProps) {
     dispatch(addPaymentToCartAction(payment))
   }
 
+  function clearCart() {
+    dispatch(clearCartAction())
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -122,6 +128,7 @@ export function CartContextProvider({ children }: CartContextProps) {
         updateAmountCart,
         addClientCart,
         addPaymentToCart,
+        clearCart,
       }}
     >
       {children}

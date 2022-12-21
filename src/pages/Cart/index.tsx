@@ -6,7 +6,7 @@ import {
   Money,
 } from 'phosphor-react'
 import { useContext, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Item } from '../../components/Cart/Item'
 import { CartContext } from '../../contexts/CartContext'
 import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
@@ -32,8 +32,17 @@ const newClientFormValidationSchema = zod.object({
 type NewClientFormData = zod.infer<typeof newClientFormValidationSchema>
 
 export function Cart() {
-  const { items, price, client, payment, addClientCart, addPaymentToCart } =
-    useContext(CartContext)
+  const {
+    items,
+    price,
+    client,
+    payment,
+    addClientCart,
+    addPaymentToCart,
+    clearCart,
+  } = useContext(CartContext)
+
+  const navigate = useNavigate()
 
   const newClientForm = useForm<NewClientFormData>({
     resolver: zodResolver(newClientFormValidationSchema),
@@ -61,6 +70,12 @@ export function Cart() {
 
   function handleAddPayment(payment: PaymentType) {
     addPaymentToCart(payment)
+  }
+
+  function handleCompleteToOrder() {
+    clearCart()
+    toast.success('Pedido realizado com sucesso!')
+    navigate('/cart/complete')
   }
 
   useEffect(() => {
@@ -180,7 +195,9 @@ export function Cart() {
             </p>
           </div>
           <NavLink to="/cart/confirm">
-            <ButtonConfirm>Confirmar pedido</ButtonConfirm>
+            <ButtonConfirm onClick={handleCompleteToOrder}>
+              Confirmar pedido
+            </ButtonConfirm>
           </NavLink>
         </Block>
       </aside>

@@ -7,6 +7,7 @@ export enum ActionTypes {
   UPDATE_AMOUNT_CART = 'UPDATE_AMOUNT_CART',
   ADD_CLIENT_CART = 'ADD_CLIENT_CART',
   ADD_PAYMENT_CART = 'ADD_PAYMENT_CART',
+  CLEAR_CART = 'CLEAR_CART',
 }
 
 export function addProductToCartAction(item: Item) {
@@ -58,5 +59,11 @@ export function addPaymentToCartAction(payment: PaymentType) {
     payload: {
       payment,
     },
+  }
+}
+
+export function clearCartAction() {
+  return {
+    type: ActionTypes.CLEAR_CART,
   }
 }

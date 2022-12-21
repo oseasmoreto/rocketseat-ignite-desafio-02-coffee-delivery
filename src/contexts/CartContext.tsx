@@ -1,17 +1,19 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
+  addClientToCartAction,
   addProductToCartAction,
   removeProductToCartAction,
   updateAmountCartAction,
   updateProductToCartAction,
 } from '../reducers/cart/actions'
 import { cartReducer } from '../reducers/cart/reducer'
-import { Cart, Item } from '../types/cart'
+import { Cart, Client, Item } from '../types/cart'
 interface CartContextType extends Cart {
   addProductCart: (item: Item) => void
   removeProductCart: (item: Item) => void
   updateProductCart: (item: Item, quantity: number) => void
   updateAmountCart: () => void
+  addClientCart: (client: Client) => void
 }
 
 interface CartContextProps {
@@ -25,7 +27,15 @@ export function CartContextProvider({ children }: CartContextProps) {
     cartReducer,
     {
       items: [],
-      client: {},
+      client: {
+        zipcode: '',
+        address: '',
+        number: '',
+        neighbourhood: '',
+        complement: '',
+        city: '',
+        state: '',
+      },
       payment: null,
       price: {
         delivery: 0,
@@ -44,7 +54,15 @@ export function CartContextProvider({ children }: CartContextProps) {
 
       return {
         items: [],
-        client: null,
+        client: {
+          zipcode: '',
+          address: '',
+          number: '',
+          neighbourhood: '',
+          complement: '',
+          city: '',
+          state: '',
+        },
         payment: null,
         price: {
           delivery: 0,
@@ -81,6 +99,10 @@ export function CartContextProvider({ children }: CartContextProps) {
     dispatch(updateAmountCartAction())
   }
 
+  function addClientCart(client: Client) {
+    dispatch(addClientToCartAction(client))
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -92,6 +114,7 @@ export function CartContextProvider({ children }: CartContextProps) {
         removeProductCart,
         updateProductCart,
         updateAmountCart,
+        addClientCart,
       }}
     >
       {children}

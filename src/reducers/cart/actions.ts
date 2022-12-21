@@ -1,10 +1,11 @@
-import { Item } from '../../types/cart'
+import { Client, Item } from '../../types/cart'
 
 export enum ActionTypes {
   ADD_NEW_PRODUCT = 'ADD_NEW_PRODUCT',
   REMOVE_PRODUCT = 'REMOVE_PRODUCT',
   UPDATE_PRODUCT = 'UPDATE_PRODUCT',
   UPDATE_AMOUNT_CART = 'UPDATE_AMOUNT_CART',
+  ADD_CLIENT_CART = 'ADD_CLIENT_CART',
 }
 
 export function addProductToCartAction(item: Item) {
@@ -38,5 +39,14 @@ export function updateProductToCartAction(item: Item, quantity: number) {
 export function updateAmountCartAction() {
   return {
     type: ActionTypes.UPDATE_AMOUNT_CART,
+  }
+}
+
+export function addClientToCartAction(client: Client) {
+  return {
+    type: ActionTypes.ADD_CLIENT_CART,
+    payload: {
+      client,
+    },
   }
 }

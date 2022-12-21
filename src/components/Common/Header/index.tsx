@@ -8,7 +8,7 @@ import { CartContext } from '../../../contexts/CartContext'
 import { useContext } from 'react'
 
 export function Header() {
-  const { items } = useContext(CartContext)
+  const { items, client } = useContext(CartContext)
   const totalCart = items.length
   const activeCart = totalCart > 0
 
@@ -20,8 +20,8 @@ export function Header() {
         </NavLink>
         <div className="box-location">
           <div className="location">
-            <FontAwesomeIcon fontSize={18} icon={faLocationDot} /> Porto Alegre,
-            RG
+            <FontAwesomeIcon fontSize={18} icon={faLocationDot} /> {client.city}
+            ,{client.state}
           </div>
           <NavLink to="/cart" className="box-button">
             <ButtonCart variant="default" />

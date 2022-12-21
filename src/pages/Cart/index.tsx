@@ -5,14 +5,66 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Item } from '../../components/Cart/Item'
 import { CartContext } from '../../contexts/CartContext'
 import { Block, ButtonConfirm, ButtonPayment, CartContainer } from './styles'
 
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const newClientFormValidationSchema = zod.object({
+  zipcode: zod.string().min(8, 'Informe o CEP.').max(8, 'Informe o CEP.'),
+  address: zod.string().min(5, 'Informe a Rua.'),
+  number: zod.string().min(3, 'Informe o número.'),
+  neighbourhood: zod.string().min(3, 'Informe o bairro.'),
+  complement: zod.string().nullable(),
+  city: zod.string().min(3, 'Informe a cidade.'),
+  state: zod.string().min(2, 'Informe o UF.').max(2, 'Informe o UF'),
+})
+
+type NewClientFormData = zod.infer<typeof newClientFormValidationSchema>
+
 export function Cart() {
-  const { items, price } = useContext(CartContext)
+  const { items, price, client, addClientCart } = useContext(CartContext)
+
+  const newClientForm = useForm<NewClientFormData>({
+    resolver: zodResolver(newClientFormValidationSchema),
+    defaultValues: {
+      zipcode: client.zipcode,
+      address: client.address,
+      number: client.number,
+      neighbourhood: client.neighbourhood,
+      complement: client.complement,
+      city: client.city,
+      state: client.state,
+    },
+  })
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+  } = newClientForm
+
+  function handleAddAddressClient(data: NewClientFormData) {
+    addClientCart(data)
+    toast.success('Endereço salvo com sucesso!')
+  }
+
+  useEffect(() => {
+    if (errors === null) return
+
+    const errorsValues = Object.values(errors)
+
+    errorsValues.map((error) => {
+      return toast.error(error.message)
+    })
+  }, [errors])
 
   if (items.length === 0)
     return (
@@ -40,23 +92,32 @@ export function Cart() {
               <small>Informe o endereço onde deseja recerber o pedido</small>
             </p>
           </div>
-          <form action="">
+          <form onSubmit={handleSubmit(handleAddAddressClient)} action="">
             <div className="box-form">
-              <input type="tel" name="zipcod" placeholder="CEP" />
+              <input type="tel" {...register('zipcode')} placeholder="CEP" />
             </div>
             <div className="box-form one">
-              <input type="text" name="address" placeholder="Rua" />
+              <input type="text" {...register('address')} placeholder="Rua" />
             </div>
 
             <div className="box-form two">
-              <input type="text" name="number" placeholder="Número" />
-              <input type="text" name="complement" placeholder="Complemento" />
+              <input type="text" {...register('number')} placeholder="Número" />
+              <input
+                type="text"
+                {...register('complement')}
+                placeholder="Complemento"
+              />
             </div>
             <div className="box-form tree">
-              <input type="text" name="bairro" placeholder="Bairro" />
-              <input type="text" name="city" placeholder="Cidade" />
-              <input type="text" name="uf" placeholder="UF" />
+              <input
+                type="text"
+                {...register('neighbourhood')}
+                placeholder="Bairro"
+              />
+              <input type="text" {...register('city')} placeholder="Cidade" />
+              <input type="text" {...register('state')} placeholder="UF" />
             </div>
+            <ButtonConfirm>Salvar endereço</ButtonConfirm>
           </form>
         </Block>
         <Block className="payment">

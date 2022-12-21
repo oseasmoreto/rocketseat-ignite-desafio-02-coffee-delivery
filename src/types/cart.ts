@@ -6,12 +6,13 @@ export type Item = Coffee & {
 export type Items = Item[]
 
 export type Client = {
-  cep: string
+  zipcode: string
   address: string
   number: string
   neighbourhood: string
   state: string
-  complement?: string
+  city: string
+  complement: string | null
 }
 
 export type Payment = {

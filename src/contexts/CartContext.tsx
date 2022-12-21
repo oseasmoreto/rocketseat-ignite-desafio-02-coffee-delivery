@@ -105,6 +105,7 @@ export function CartContextProvider({ children }: CartContextProps) {
 
   function addClientCart(client: Client) {
     dispatch(addClientToCartAction(client))
+    dispatch(updateAmountCart())
   }
 
   function addPaymentToCart(payment: PaymentType) {

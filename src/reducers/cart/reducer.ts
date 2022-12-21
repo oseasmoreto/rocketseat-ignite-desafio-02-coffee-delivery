@@ -54,8 +54,10 @@ export function cartReducer(state: CartState, action: any) {
       })
     }
     case ActionTypes.ADD_CLIENT_CART: {
+      const priceDelivery = generateRandomNumber()
       return produce(state, (draft) => {
         draft.client = action.payload.client
+        draft.price.delivery = priceDelivery
       })
     }
     case ActionTypes.ADD_PAYMENT_CART: {
@@ -66,9 +68,18 @@ export function cartReducer(state: CartState, action: any) {
     case ActionTypes.CLEAR_CART: {
       return produce(state, (draft) => {
         draft.items = []
+        draft.price.amount = 0
+        draft.price.items = 0
       })
     }
     default:
       return state
   }
+}
+
+function generateRandomNumber(): number {
+  const min = 0.02
+  const max = 10.99
+  const highlightedNumber = Math.random() * (max - min) + min
+  return highlightedNumber
 }
